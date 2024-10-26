@@ -4,7 +4,7 @@ import StudentView from "./components/StudentView";
 function App() {
   return (
     <div className="App">
-      <h1>hello</h1>
+      <h1>Welcome to Student service</h1>
         <StudentView/>
     </div>
   );
