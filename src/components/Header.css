@@ -1,0 +1,17 @@
+/* Body Padding for Fixed Navbar */
+body {
+    padding-top: 70px;
+}
+
+.nav-brand{
+    font-size: 25px;
+}
+.nav-brand:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.nav-link:hover {
+    text-decoration: none;
+    color: black;
+}

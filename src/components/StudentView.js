@@ -50,9 +50,9 @@ export default function StudentView({ direction, ...args }) {
     },[]);
 
 
-
     return (
         <div className="container">
+            <div align="right"><Button className="info"><a style={{textDecoration:"none",color:"white"}} href="/add-student">Add Students</a></Button></div>
             <Table responsive>
                 <thead>
                 <tr>

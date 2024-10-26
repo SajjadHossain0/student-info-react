@@ -1,0 +1,28 @@
+.footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+.footer-text {
+    font-size: 16px;
+    color: #6c757d;
+}
+
+.footer-name {
+    font-weight: bold;
+    color: #343a40;
+}
+
+.social-icons .footer-icon {
+    font-size: 24px;
+    color: #343a40;
+    transition: color 0.3s ease;
+}
+
+.social-icons .footer-icon:hover {
+    color: #000000; /* LinkedIn, GitHub, Instagram, Facebook icons change color on hover */
+}
+
+.footer-icon {
+    text-decoration: none;
+}
