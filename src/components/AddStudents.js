@@ -3,14 +3,16 @@ import {Button, Card, Form, FormGroup, Input, Label} from "reactstrap";
 import axios, {post} from "axios";
 import BASE_URL from "../StudentAPI";
 import {Bounce, toast, ToastContainer} from "react-toastify";
+import {useNavigate} from "react-router-dom";
 
 function handleForm() {
 
 }
 
 export default function AddStudents(props) {
+    const navigate = useNavigate();
 
-    const notify = () => toast.success('Student Added successfully.', {
+    const notify = (message) => toast.success(message, {
         position: "top-center",
         autoClose: 1000,
         hideProgressBar: false,
@@ -28,7 +30,11 @@ export default function AddStudents(props) {
         axios.post(`${BASE_URL}/save`, data)
             .then(response => {
                     console.log(response);
-                    notify();
+                    notify("Student Added successfully.");
+                    setTimeout(() =>{
+                        navigate("/student")
+                    });
+
                 },
                 (error) => {
                     console.log(error);
