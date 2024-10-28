@@ -25,7 +25,7 @@ function App() {
                     <Route path="/add-student" element={<AddStudents/>}/>
                 </Routes>
 
-                <Footer/>
+                {/*<Footer/>*/}
             </div>
         </BrowserRouter>
     );

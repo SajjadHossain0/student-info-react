@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Table} from 'reactstrap';
-import { CiMenuKebab } from "react-icons/ci";
+import {Button, Table} from 'reactstrap';
 import PropTypes from "prop-types";
-import {Students} from "../StudentAPI";
-
+import axios from "axios";
+import BASE_URL from "../StudentAPI";
+import {ToastContainer, toast, Bounce} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function StudentView({ direction, ...args }) {
@@ -38,16 +39,58 @@ export default function StudentView({ direction, ...args }) {
     ]
 */
 
-    const [students, setStudents] = useState([]);
+/*    const [students, setStudents] = useState([]);
 
+    //
     useEffect(() => {
+        document.title = "Student View";
         Students()
             .then((students) => {
             setStudents(students.data);
         }).catch((err) => {
             console.log(err);
         });
-    },[]);
+    },[]);*/
+    const notify = () => toast.success('Delete successfully.', {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+    });
+
+    const [students, setStudents] = useState([]);
+
+    const getAllStudents = () => {
+        axios.get(`${BASE_URL}`)
+            .then(response => {
+                console.log(response);
+                setStudents(response.data);
+            },
+                (error) => {
+                console.log(error);
+                }
+            );
+    }
+
+    const deleteStudent = (id) => {
+        axios.delete(`${BASE_URL}/delete/${id}`)
+            .then(() => {
+                setStudents(students.filter(student => student.id !== id));
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
+    useEffect(() => {
+        document.title = "Student View";
+        getAllStudents();
+    }, []);
 
 
     return (
@@ -65,7 +108,7 @@ export default function StudentView({ direction, ...args }) {
                 </thead>
 
                 <tbody>
-                {students.map((student,index) =>
+                {students.map((student,index)=> (
                     <tr key={student.id}>
                         <td>{index+1}</td>
                         <td>{student.name}</td>
@@ -75,19 +118,22 @@ export default function StudentView({ direction, ...args }) {
                             <Button style={{marginRight: 5}} color="info">
                                 Edit
                             </Button>
-                            <Button style={{marginLeft: 5}} color="danger">
-                                Delete
-                            </Button>
+                            <Button style={{marginLeft: 5}} color="danger"
+                            onClick={() => {
+                                deleteStudent(student.id)
+                                notify()
+                            }}>Delete</Button>
                         </td>
                     </tr>
-                )}
-            </tbody>
+                ))}
+
+                </tbody>
 
 
-
-        </Table>
-</div>
-)
+            </Table>
+            <ToastContainer/>
+        </div>
+    )
 }
 StudentView.propTypes = {
     direction: PropTypes.string,

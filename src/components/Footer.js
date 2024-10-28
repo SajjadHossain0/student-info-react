@@ -6,7 +6,7 @@ import { RiInstagramFill } from "react-icons/ri";
 
 export default function Footer() {
     return (
-        <footer align="bottom" className="footer py-4">
+        <div className="footer py-4">
             <div className="container">
                 <div className="text-center mb-3">
                     <p className="footer-text mb-0">Created by <span className="footer-name">Md. Sajjad Hossain</span> || All Rights Reserved</p>
@@ -26,6 +26,6 @@ export default function Footer() {
                     </a>
                 </div>
             </div>
-        </footer>
+        </div>
     );
 }
