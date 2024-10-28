@@ -22,16 +22,13 @@ export default function AddStudents(props) {
         transition: Bounce,
     });
 
-    const [addStudent, setAddStudent] = useState({
-        name: '',
-        email: '',
-        age: ''
-    });
+    const [addStudent, setAddStudent] = useState([]);
 
     const postStudentData=(data) =>{
         axios.post(`${BASE_URL}/save`, data)
             .then(response => {
                     console.log(response);
+                    notify();
                 },
                 (error) => {
                     console.log(error);
@@ -63,7 +60,7 @@ export default function AddStudents(props) {
                                 name="name"
                                 placeholder="Enter Full name..."
                                 type="text"
-                                required={true}
+                                required
                                 onChange={(e) => setAddStudent({ ...addStudent, name: e.target.value })}
                             />
                         </FormGroup>
@@ -74,7 +71,7 @@ export default function AddStudents(props) {
                                 name="email"
                                 placeholder="example@domain.com..."
                                 type="email"
-                                required={true}
+                                required
                                 onChange={(e) => setAddStudent({ ...addStudent, email: e.target.value })}
                             />
                         </FormGroup>
@@ -85,12 +82,11 @@ export default function AddStudents(props) {
                                 name="age"
                                 placeholder="Enter age..."
                                 type="number"
-                                required={true}
+                                required
                                 onChange={(e) => setAddStudent({ ...addStudent, age: e.target.value })}
                             />
                         </FormGroup>
-                        <Button type="submit"
-                        onClick={notify}>Add Student</Button>
+                        <Button type="submit">Add Student</Button>
                     </Form>
                 </div>
             </Card>
